@@ -1,0 +1,5 @@
+.Input {
+   display: flex;
+   justify-content: flex-start;
+   margin-left: calc(20px + 2vmin);
+}
