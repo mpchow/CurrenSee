@@ -6,9 +6,15 @@ import Input from '../Input/Input';
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <h1 className="App-Title">Currency Converter</h1>
-      </header>
+      <div className="App-header">
+        <h1 className="App-title">Currency Converter</h1>
+      </div>
+
+      <div className="App-body">
+        <Input />
+        <Graph />
+      </div>
+      
     </div>
   );
 }
