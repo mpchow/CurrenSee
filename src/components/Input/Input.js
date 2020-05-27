@@ -7,21 +7,27 @@ const currCodes = ['AED', 'ARS', 'AUD', 'BGN', 'BRL', 'BSD', 'CAD', 'CHF', 'CLP'
 'SEK', 'SGD', 'THB', 'TRY', 'TWD', 'UAH', 'USD', 'UYU', 'ZAR'];
 
 class Input extends React.Component {
-   constructor(props) {
-      super(props);
+   constructor(props){
+      super(props); 
+      this.handleSubmit = this.handleSubmit.bind(this);
+   }
+
+   handleSubmit(event) {
+      event.preventDefault();
+      this.props.onSubmit(event);
    }
 
    render() {
       return (
       <div className="Input">
-         <form onSubmit={this.props.onSubmit}>
+         <form onSubmit={this.handleSubmit}>
             <select id="currFrom" name="currFrom">
                <option value={null}>Currency From</option>
-               {currCodes.map( code => {return <option value={code}>{code}</option>})}
+               {currCodes.map( code => {return <option key={code} value={code}>{code}</option>})}
             </select>
             <select id="currTo" name="currTo">
                <option value={null}>Currency To</option>
-               {currCodes.map( code => {return <option value={code}>{code}</option>})}
+               {currCodes.map( code => {return <option key={code} value={code}>{code}</option>})}
             </select>
             <input type="number" id="amount" name="amount" placeholder="Amount"></input>
             <input type="submit"></input>
