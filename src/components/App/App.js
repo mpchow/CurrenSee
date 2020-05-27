@@ -5,7 +5,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1 className="Title">Currency Converter</h1>
+        <h1 className="App-Title">Currency Converter</h1>
       </header>
     </div>
   );
