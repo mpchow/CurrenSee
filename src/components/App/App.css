@@ -2,14 +2,15 @@
   /* text-align: center; */
   background-color: #282c34;
   min-height: 100vh;
+  max-height: 100vh;
 }
 
 .App-header {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  justify-content: flex-start;
-  font-size: calc(10px + 5vmin);
+  justify-content: center;
+  font-size: calc(10px + 3vmin);
   color: white;
 }
 
@@ -18,5 +19,17 @@
 }
 
 .App-body {
-  /* color: white; */
+  color: white;
+}
+
+.App-body-conversion {
+  margin: calc(20px + 2vmin);
+}
+
+.App-graphs {
+  max-height: 1px;
+}
+
+h1 {
+  text-align: center;
 }
