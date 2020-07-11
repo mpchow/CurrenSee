@@ -33,14 +33,26 @@ class App extends React.Component {
     return (
       <div className="App">
         <div className="App-header">
-          <h1 className="App-title">Currency Converter</h1>
-          <h1>{this.state.rate}</h1>
+          <div>
+            <h1 className="App-title">Currency Conversion</h1>
+            <Input onSubmit={this.handleSubmit}/>
+          </div>
+
+          <div>
+            <h1 className="App-title">Historical Trends</h1>
+            <Input onSubmit={this.handleSubmit}/>
+          </div>
         </div>
 
         <div className="App-body">
-          <Input onSubmit={this.handleSubmit}/>
-          {this.state.data ? <p>{this.state.data.amount}</p> : null}
-          <div className="Graphs">
+
+
+          <div className="App-body-conversion">
+            {this.state.data ? <p>{this.state.data.amount} {this.state.data.currFrom} = {this.state.rate*this.state.data.amount} {this.state.data.currTo}</p> : null} 
+          </div>
+
+
+          <div className="App-graphs">
             <Graph />
 
           </div>
