@@ -7,7 +7,7 @@ const exchange = {
       .then(res => res.json())
       .then(jsonResponse => {
          if(jsonResponse) {
-            return jsonResponse.rates[baseCurrency];
+            return (jsonResponse.rates[returnCurrency] / jsonResponse.rates[baseCurrency]);
          }
       });
    }
