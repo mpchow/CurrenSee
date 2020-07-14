@@ -5,4 +5,4 @@ Built with React, Chart.js, and https://exchangeratesapi.io
 
 
 # Build
-Just run 'npm start' and enjoy!
+Just run ```npm install``` and enjoy!
