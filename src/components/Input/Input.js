@@ -29,7 +29,7 @@ class Input extends React.Component {
                <option value={null}>Currency To</option>
                {currCodes.map( code => {return <option key={code} value={code}>{code}</option>})}
             </select>
-            <input type="number" id="amount" name="amount" placeholder="Amount"></input>
+            {this.props.type === "Conversion" ? <input type="number" id="amount" name="amount" placeholder="Amount"></input> :   <input type="number" id="baseYear" name="baseYear" placeholder="Start Year"></input>}
             <input type="submit"></input>
          </form>
       </div>);
