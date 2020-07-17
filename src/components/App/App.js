@@ -15,16 +15,31 @@ class App extends React.Component {
     event.preventDefault();
     
     const formData = new FormData(event.target);
-    const data = {
-      currFrom: formData.get('currFrom'),
-      currTo: formData.get('currTo'),
-      amount: formData.get('amount')
-    };
 
-    console.log(typeof data.currFrom);
+    //We want to check which form submitted the data and then properly set the state
+    if (formData.get('amount')) {
+      const data = {
+        currFrom: formData.get('currFrom'), 
+        currTo: formData.get('currTo'), 
+        amount: formData.get('amount') 
+      };
 
-    exchange.search(data.currFrom, data.currTo)
-    .then(rate => this.setState({rate: rate, data: data}));
+      exchange.convert(data.currFrom, data.currTo)
+      .then(rate => this.setState({rate: rate, data: data}));
+
+    }
+    else {
+      const data = {
+        currFrom: formData.get('currFrom'), 
+        currTo: formData.get('currTo'), 
+        baseYear: formData.get('baseYear') 
+      };
+      
+      exchange.historical(data.currFrom, data.currTo, data.baseYear+"-01-01")
+      .then(dates => this.setState({dates: dates}));
+
+    }
+
   }
 
 
@@ -35,12 +50,12 @@ class App extends React.Component {
         <div className="App-header">
           <div>
             <h1 className="App-title">Currency Conversion</h1>
-            <Input onSubmit={this.handleSubmit}/>
+            <Input onSubmit={this.handleSubmit} type={"Conversion"}/>
           </div>
 
           <div>
             <h1 className="App-title">Historical Trends</h1>
-            <Input onSubmit={this.handleSubmit}/>
+            <Input onSubmit={this.handleSubmit} type={"Trends"}/>
           </div>
         </div>
 
@@ -53,8 +68,7 @@ class App extends React.Component {
 
 
           <div className="App-graphs">
-            <Graph />
-
+            {this.state.dates ?  <Graph dates={this.state.dates} /> : null}
           </div>
 
         </div>
