@@ -3,11 +3,13 @@ import './App.css';
 import Graph from '../Graph/Graph';
 import Input from '../Input/Input';
 import exchange from '../../Util/ExchangeRate';
+import {v4 as uuidv4} from 'uuid';
+
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {historic: [], renderGraphs: false};
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -36,7 +38,9 @@ class App extends React.Component {
       };
       
       exchange.historical(data.currFrom, data.currTo, data.baseYear+"-01-01")
-      .then(dates => this.setState({dates: dates}));
+      .then(dates => this.setState((state) => {
+        return {rate: state.rate, data: state.data, historic: [{id: uuidv4(), dates: dates}, ...state.historic], renderGraphs: true};
+      }));
 
     }
 
@@ -63,12 +67,12 @@ class App extends React.Component {
 
 
           <div className="App-body-conversion">
-            {this.state.data ? <p>{this.state.data.amount} {this.state.data.currFrom} = {this.state.rate*this.state.data.amount} {this.state.data.currTo}</p> : null} 
+            {this.state.data && <p>{this.state.data.amount} {this.state.data.currFrom} = {this.state.rate*this.state.data.amount} {this.state.data.currTo}</p> } 
           </div>
 
 
           <div className="App-graphs">
-            {this.state.dates ?  <Graph dates={this.state.dates} /> : null}
+            {this.state.renderGraphs &&  <Graph dates={this.state.historic[0]} />}
           </div>
 
         </div>
