@@ -1,8 +1,6 @@
 .App {
-  /* text-align: center; */
-  background-color: #282c34;
   min-height: 100vh;
-  max-height: 100vh;
+  background-color: #282c34;
 }
 
 .App-header {
@@ -27,7 +25,11 @@
 }
 
 .App-graphs {
-  max-height: 1px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 h1 {
