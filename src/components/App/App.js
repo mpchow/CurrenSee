@@ -11,11 +11,13 @@ class App extends React.Component {
     super(props);
     this.state = {historic: [], renderGraphs: false};
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.deleteGraph = this.deleteGraph.bind(this);
   }
 
   handleSubmit(event) {
     event.preventDefault();
     
+    //Retrieve the data from the form that was submitted
     const formData = new FormData(event.target);
 
     //We want to check which form submitted the data and then properly set the state
@@ -37,13 +39,17 @@ class App extends React.Component {
         baseYear: formData.get('baseYear') 
       };
       
+      //In this case, we may have multiple graphs with historical data, so we want to set state to be able to render them all
       exchange.historical(data.currFrom, data.currTo, data.baseYear+"-01-01")
       .then(dates => this.setState((state) => {
-        return {rate: state.rate, data: state.data, historic: [{id: uuidv4(), dates: dates}, ...state.historic], renderGraphs: true};
+        return {rate: state.rate, data: state.data, historic: [...state.historic, {id: uuidv4(), dates: dates}], renderGraphs: true};
       }));
 
     }
+  }
 
+  deleteGraph(id) {
+    this.setState(state => state.historic.filter(item => item.id !== id));
   }
 
 
@@ -64,15 +70,13 @@ class App extends React.Component {
         </div>
 
         <div className="App-body">
-
-
-          <div className="App-body-conversion">
+          {/* <div className="App-body-conversion">
             {this.state.data && <p>{this.state.data.amount} {this.state.data.currFrom} = {this.state.rate*this.state.data.amount} {this.state.data.currTo}</p> } 
-          </div>
-
+          </div> */}
 
           <div className="App-graphs">
-            {this.state.renderGraphs &&  <Graph dates={this.state.historic[0]} />}
+           {/* TODO: change the way graphs are rendered to handle multiple graphs, also add a fucntion to pass through to delete a graph */}
+            {this.state.historic.map(timePeriod =>  <Graph data={timePeriod} delete={this.deleteGraph} />)}
           </div>
 
         </div>
