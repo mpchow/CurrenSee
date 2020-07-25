@@ -49,7 +49,10 @@ class App extends React.Component {
   }
 
   deleteGraph(id) {
-    this.setState(state => state.historic.filter(item => item.id !== id));
+    // this.setState(prevState => {historic: prevState.historic.filter(item => parseInt(item.id) !== parseInt(id))});
+    this.setState({historic: this.state.historic.filter(item => item.id !== id)});
+    console.log(this.state.historic);
+    this.render();
   }
 
 
@@ -75,7 +78,6 @@ class App extends React.Component {
           </div> */}
 
           <div className="App-graphs">
-           {/* TODO: change the way graphs are rendered to handle multiple graphs, also add a fucntion to pass through to delete a graph */}
             {this.state.historic.map(timePeriod =>  <Graph data={timePeriod} delete={this.deleteGraph} />)}
           </div>
 
