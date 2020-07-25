@@ -73,9 +73,9 @@ class App extends React.Component {
         </div>
 
         <div className="App-body">
-          {/* <div className="App-body-conversion">
+          <div className="App-body-conversion">
             {this.state.data && <p>{this.state.data.amount} {this.state.data.currFrom} = {this.state.rate*this.state.data.amount} {this.state.data.currTo}</p> } 
-          </div> */}
+          </div>
 
           <div className="App-graphs">
             {this.state.historic.map(timePeriod =>  <Graph data={timePeriod} delete={this.deleteGraph} />)}
