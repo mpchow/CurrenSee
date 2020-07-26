@@ -42,14 +42,13 @@ class App extends React.Component {
       //In this case, we may have multiple graphs with historical data, so we want to set state to be able to render them all
       exchange.historical(data.currFrom, data.currTo, data.baseYear+"-01-01")
       .then(dates => this.setState((state) => {
-        return {rate: state.rate, data: state.data, historic: [...state.historic, {id: uuidv4(), dates: dates}], renderGraphs: true};
+        return {rate: state.rate, data: state.data, historic: [...state.historic, {id: uuidv4(), dates: dates, input: data}], renderGraphs: true};
       }));
 
     }
   }
 
   deleteGraph(id) {
-    // this.setState(prevState => {historic: prevState.historic.filter(item => parseInt(item.id) !== parseInt(id))});
     this.setState({historic: this.state.historic.filter(item => item.id !== id)});
     console.log(this.state.historic);
     this.render();
