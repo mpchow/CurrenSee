@@ -2,12 +2,8 @@ import React from 'react';
 import Chart from 'chart.js';
 import './Graph.css';
 //Use chart.js here
-let myLineChart;
 
 class Graph extends React.PureComponent {
-   chartRef = React.createRef();
-
-
    chartRef = React.createRef();
 
    componentDidMount() {
@@ -19,12 +15,13 @@ class Graph extends React.PureComponent {
    }
 
    buildChart = () => {
+    Chart.defaults.global.defaultColor = 'rgb(1,1,1,1)';
        const myChartRef = this.chartRef.current.getContext("2d");
        const data = this.props.data.dates.map(item => { return {rate: item.rate, date: new Date(item.date)};}).sort((a, b) => a.date - b.date);
        const dates = data.map(date => `${date.date.getMonth()}-${date.date.getDate()}-${date.date.getYear()+1900}` );
        const rates = data.map(date => date.rate);
 
-       myLineChart = new Chart(myChartRef, {
+        new Chart(myChartRef, {
            type: "line",
            data: {
                //Bring in data
