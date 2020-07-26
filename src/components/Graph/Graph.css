@@ -1,0 +1,9 @@
+.Graph {
+   width: calc(500px + 2vw);
+   height: calc(300px + 2vh);
+}
+
+button {
+   float: right;
+   margin-bottom: -2vh;
+}
